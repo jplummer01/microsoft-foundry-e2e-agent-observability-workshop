@@ -111,8 +111,8 @@ set_env_if_empty() {
     local current
     current=$(grep "^${key}=" "${ENV_FILE}" | cut -d'=' -f2-)
     if [ -z "${current}" ] && [ -n "${value}" ]; then
-        # Use a different delimiter for sed to handle URLs with /
-        sed -i "s|^${key}=.*|${key}=${value}|" "${ENV_FILE}"
+        # Quote values to handle special characters (semicolons, parens, etc.)
+        sed -i "s|^${key}=.*|${key}=\"${value}\"|" "${ENV_FILE}"
         echo -e "${GREEN}  ✓ ${key} → ${value:0:50}...${NC}"
         return 0
     elif [ -n "${current}" ]; then
@@ -296,6 +296,8 @@ else
     fi
 
     if [ -n "${APP_INSIGHTS}" ]; then
+        # Ensure the application-insights CLI extension is installed (suppress interactive prompt)
+        az extension add --name application-insights --yes 2>/dev/null || true
         TELEMETRY_CONN=$(az monitor app-insights component show \
             --app "${APP_INSIGHTS}" \
             --resource-group "${APP_INSIGHTS_RG}" \
