@@ -210,3 +210,6 @@ __marimo__/
 # Sandbox and sensitive folders
 **/SANDBOX/
 **/DO_NOT_COMMIT/
+
+# MARP slide exports
+labs/notebooks/0-setup/slides/output/

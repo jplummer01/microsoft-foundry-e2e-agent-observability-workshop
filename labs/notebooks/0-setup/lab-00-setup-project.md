@@ -61,20 +61,21 @@ This takes a few minutes to complete
 
 ## Step 9: Agent Playground Ready
 
-The agent is now ready to test in playground
+The agent is now ready to test in playground. Note: If you do _not_ see the Tools pane showing the "Web Search" tool by default, simply click the Tools drop down and activate the Web Search toggle to use _Grounding with Bing_. You should then see the same experience below.
 
 ![Agent Playground Ready](assets/09-agent-playground-ready.png)
 
 ## Step 10: Create App Insights
 
-But first, select the Traces tab. You should see the view below. Click to create App Insights
+But first, select the Traces tab. **Save the agent if you are prompted to do so** before your switch.
+You should see the view below. Click "Connect" to create and connect the App Insights resource. 
 
 ![Create App Insights](assets/10-create-app-insights.png)
 
 
 ## Step 11: Create App Insights Detail
 
-Fill in details
+Fill in details. Use the provided default names - make sure it has created a new Log Analytics workspace as well.
 
 ![Create App Insights Detail](assets/11-create-app-insights-detail.png)
 
@@ -86,7 +87,7 @@ Click create when complete
 
 ## Step 13: App Insights Created
 
-App Insights has been created.
+App Insights has been created. You can verify this at any time by clicking on the project name drop-down menu (top left) and looking for _Project Details_. In that details page, click the _Connected Resources_ tab and you should see a new resource created and connected to your project.
 
 ![App Insights Created](assets/13-app-insights-created.png)
 
@@ -124,7 +125,9 @@ Keep responses focused and helpful.
 ## Step 15a: View Agent Metrics
 
 1. Click on the Metrics link above the response panel - it shows you available evaluators.
-1. Customize the list to reflect evaluation criteria you want to use - try a new request.
+1. Customize the list to reflect evaluation criteria you want to use - save the agente.g., add safety evals.
+1. Try a new request. `I want to book a week long vacation to Paris for a group of 3, leaving Seattle Jul 3`
+
 
 ![View Agent Metrics](assets/15-view-agent-metrics.png)
 
@@ -138,19 +141,27 @@ Keep responses focused and helpful.
 
 ## Step 16: Configure Agent Properties
 
-You can configure the agent properties for better impact - e.g., set default starter prompts aligned to use case
+You can configure the agent properties for better impact - e.g., set default starter prompts aligned to use case. Click the gear icon to get started - and try using this data:
+
+1. Display Name: `Contoso Travel Assistant`
+1. Description: `Welcome to Contoso Travel. We can help you plan your next itinerary with flight bookings, car rentals and hotel reservations. Just tell us your destination and the numnber of travellers in your group - and we'll do the rest.`
+1. Add starter prompts:
+    - `I want to plan a multi-day travel itinerary`
+    - `I want to rent a car at my travel destination`
+    - `I want to book a flight and hotel for my travels`
+1. Don't forget to save the agent.
 
 ![Configure Agent Properties](assets/16-configure-agent-properties.png)
 
 ## Step 17: Review Configured Agent
 
-View the updated playground look
+View the updated playground look by starting a new chat session. You should see the newly configured agent.
 
 ![Review Configured Agent](assets/17-review-configured-agent.png)
 
 ## Step 18: Test Configured Agent
 
-Test a starter prompt
+Test one of the starter prompts by clicking on it.
 
 ![Test Configured Agent](assets/18-test-configured-agent.png)
 
@@ -160,13 +171,19 @@ Test a starter prompt
 1. Add your responses. This is creating a conversation with state.
 1. Note how the agent remembers and uses context from the history.
 
-    ![View Agent Response](assets/19-view-agent-response.png)
+(You can try reusing the previous prompt of `I want to book a week long vacation to Paris for a group of 3, leaving Seattle Jul 3`). Your response may differ from the screenshot in both content and references - that's expected due to the stochastic behaviors of LLMs.
+
+![View Agent Response](assets/19-view-agent-response.png)
 
 ## Step 20: View Agent Trace
 
 1. Click the Traces tab - you should see rows for each conversation run
 1. Click on the Trace ID - you should see something like this:
-1. Want to understand what the Trace ID is showing - try **Ask AI**
+
+    ![View Agent Response](assets/20-view-agent-trace.png)
+
+
+1. Want to understand what the Trace ID is showing - try clicking the **Ask AI** button:
     ```bash
     Explain what the trace ID is showing
     ```
@@ -188,13 +205,12 @@ Test a starter prompt
     In summary, the trace ID is a key tool for observability in Azure AI Foundry, providing deep visibility into the internal execution of your AI workflows and enabling precise troubleshooting and performance analysis.
     ```
 
-1. **Tip: Use Ask AI to explain things you see in the Portal**. It understands your account state and can give you meaningful insights that will build your intuition in the context of your current developer workflow.
-
-    ![View Agent Trace](assets/20-view-agent-trace.png)
+1. **Tip: Use Ask AI to explain things you see in the Portal**. It understands your account state and can give you meaningful insights that will build your intuition in the context of your current developer workflow. It's a good way to diagnose issues and discover information intuitively.
+    - For instance, try copying the trace (waterfall text) from the trace ID view and paste it into the Ask AI chat. Ask `Can you analyze the trace and give me insights and explain the components` to build your intuition for spans and trace logs.
 
 ## Step 21: View Conversation Trace
 
-1. You can also view conversation history. 
+1. You can also view conversation history. Note how we have the same conversation ID but multiple trace ID logs. Each represents one turn of the conversation, with conversation history maintained for later turns.
 1. Try asking about what this represents. You may see something like this:
     ```bash
     A Conversation ID in Azure AI Foundry represents the persistent context of an end-to-end dialogue history between a user and an agent. It uniquely identifies a conversation session, allowing you to track and review the entire interaction, including messages, tool calls, responses, and tokens exchanged during that session.
@@ -211,7 +227,7 @@ Test a starter prompt
     This concept is distinct from a Trace ID, which tracks the technical execution of a workflow or operation, while the Conversation ID focuses on the dialogue context and content.
     ```
 
-1. Try exploring other elements in the Trace row - e.g., click the Evaluations tab in the right pane to see the evaluator used, the score assessed, and an explanation for why the score was assessed this way.
+1. Note that we now have **trace-linked evaluations** - for any trace ID, you can click the Evaluations tab (right pane) to see the evaluators used and the AI quality scores assessed - along with explainers for why this score was given. This allows us to accelerate the closing of the loop between issue detection (eval metrics) and diagnosis (trace logs). For insance, we may see that AI quality drops when we upgrade a model - and looking at the trace, we may diagnose that the new model was not invoking the right tools.
 
     ![View Conversation Trace](assets/21-view-conversation-trace.png)
 
@@ -223,7 +239,7 @@ The preview agent option gives you a UI for your agent (think web app)
 
 ## Step 23: Test Preview
 
-Note that the preview shows configured starter prompts
+Note that the preview shows configured starter prompts. 
 
 ![Test Preview](assets/23-test-preview.png)
 
@@ -235,7 +251,7 @@ You can review the agent response in the preview tab itself
 
 ## Step 25: Review Trace
 
-But note that if you return to agent you can now see this interaction captured in the traces as well.
+But note that if you return to agent you can now see this interaction captured in the traces as well. You should be able to compare metrics between this run and the previous one (from Playground) to get an intuition for performance. _Note that this preview does not run the evaluations for you by default_.
 
 ![Review Trace](assets/25-review-trace.png)
 
@@ -262,6 +278,7 @@ By now you should have a sense for the _Tracing_ and _Evaluations_ capabilities 
 
 ## Step 27: Run a Red Teaming Scan
 
+1. Click on the _Evaluations_ tab in the **sidebar** of the Portal. This takes you to Evaluations across the project (not specific to that agent)
 1. Click on the Red Teaming tab
     ![Red Teaming](assets/29-red-teaming-create.png)
 1. For now, select the _Model_ option and pick the default model used in your agent (e.g, gpt-4.1)

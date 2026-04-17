@@ -15,6 +15,25 @@
 
 ## 2. Run Setup-Env Script
 
+_If you are in a multi-tenant situation, do this first_
+
+```bash
+# Set default tenant (used for login)
+az login --tenant <TENANT_ID>
+
+# Set default subscription
+az account set --subscription <SUBSCRIPTION_NAME_OR_ID>
+
+#Verify with
+az account show
+```
+
+_Also check that the AI Toolkit and Azure extensions for VS Code are using the right tenants_.
+
+1. Click Azure extension icon - look at Accounts & Tenants tab and ensure only 1 is checked.
+1. Click the AITK extension icon - look at My Resources and ensure the default Foundry project is set.
+
+
 1. In the VS Code terminal, run this command:
 
     ```bash
@@ -27,6 +46,11 @@
     ![Dev Env Ready](assets/27-dev-env-ready.png)
 1. Congratulations - your local env variables are set.
 
-## 3. Pick Your Code-First Path
+## 3. Choose Your Adventure
 
-Click on this [README.md](./../1-prompt-agents/README.md) to get instructions for the two code-first paths, and pick one. For _in-venue attendees_, we recommend trying the Foundry Skills path (new, preview - expect issues) to get an early intuition for how coding agents can influence your developer workflow.
+| Option | Description |
+|:---|:---|
+| [README.sdk.md](./../1-prompt-agents/README.sdk.md) | Traditional code-first path using the Microsoft Foundry SDKs and walking through code step-by-step|
+| [README.skills.md](./../1-prompt-agents/README.skills.md)| Early preview coding agents path using the "observe" Foundry Skills to drive the _observe-optimize_ loop |
+
+Once you've completed one path, you are welcome to return to this step and try the other. We suggest trying the Foundry Skills path first, to get an early intuition for how coding agents and skills can accelerate your development workflow in future.

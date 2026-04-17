@@ -1,10 +1,8 @@
-# Building Contoso Travel Using Prompt Agents
-
-## 1. (New) Using Foundry Skills
+# Observe & Optimize Contoso Travel (Prompt Agent) Using Foundry Skills
 
 The [microsoft-foundry skill](https://github.com/microsoft/GitHub-Copilot-for-Azure/blob/main/plugin/skills/microsoft-foundry/SKILL.md) provides a comprehensive guide that teaches the coding agents (like GitHub Copilot) how to manage the full lifecycle of Microsoft Foundry AI agents. It is part of the GitHub Copilot for Azure extension that is installed alongside the AI Toolkit extension in this devcontainer.
 
-### 1.1 Understand sub-skills
+## 1. Understand sub-skills
 
 The microsoft-foundry skill provides structured workflows or _sub-skills_ that cover key capabilities like deploying, evaluating, invoking, and troubleshooting AI agents hosted on Microsoft Foundry. 
 
@@ -27,7 +25,7 @@ Here is the current subset of sub-skills available - note that these are in earl
 | | |
 
 
-### 1.2 Set Default Project in AI Toolkit
+## 2. Set Default Project in AI Toolkit
 
 1. Click on the AI Toolkit icon in GitHub Codespaces (left).
 1. Under the **My Resources** tab, click the option to "Set default" project - and set it to the Foundry project we created earlier.
@@ -35,7 +33,7 @@ Here is the current subset of sub-skills available - note that these are in earl
 
 _Once this is done, you should be able to see your Microsoft Foundry assets - the models used, the agents created *with versions* etc._ right in VS Code without needing to go to the Microsoft Foundry portal.
 
-### 1.3 Verify Foundry Skill is Installed
+## 3. Verify Foundry Skill is Installed
 
 1. Use "Control + Shift + P" to access Command Palette for VS Code.
 1. Search for "Chat: Configure Skill" - scroll to the bottom of the list that is shown.
@@ -52,7 +50,7 @@ If required:
 _Foundry Skills capabilities should now be available to coding agents_
 
 
-### 1.4 (Optional) Explore Sub-Skills
+## 4. (Optional) Explore Sub-Skills
 
 Activating the sub-skill requires some knowledge of keywords that are recognized as "entry points" to specific workflows, when used in your coding agent conversations. Let's take a look at what this involves for `observe` for instance.
 
@@ -63,7 +61,11 @@ Activating the sub-skill requires some knowledge of keywords that are recognized
 1. Click the _Preview_ icon for a markdown preview
 1. Look for the "observe" tool in the table - and click the linked markdown file
 
-Review the guidance - this are the instructions that coding agents will follow. You should see something like this:
+<details>
+
+<summary> <b> CLICK HERE TO EXPAND AND VIEW THE GUIDANCE </b> </summary>
+
+The last step above should open a document with instructions for the coding agent to follow. It may look something like this:
 
 ![observe](./../0-setup/assets/30-observability-loop.png)
 
@@ -76,8 +78,9 @@ Scroll down further and you see more guidance to coding agents on how they shoul
 
 ![observe](./../0-setup/assets/32-loop-overview.png)
 
+</details>
 
-### 1.5 Activate GitHub Copilot Chat
+## 5. Activate GitHub Copilot Chat
 
 It's time to take the skill for a spin. You will need GitHub Copilot Chat for this purpose. You should have access to a free tier with relevant models to pick from. Note that using the skill may use up premium requests based on your model selection.
 
@@ -89,7 +92,7 @@ It's time to take the skill for a spin. You will need GitHub Copilot Chat for th
 1. You can also click the tools icon in Copilot Chat (below text entry window) to view and manage the currently active MCP servers and tools available to your coding agent.
 
 
-### 1.6 Try the "observe" skill
+## 6. Try the "observe" skill
 
 Let's see if we can trigger the observe skill by prompting our coding agent with a relevant task.
 
@@ -101,7 +104,7 @@ Evaluate my agent at <endpoint> using the observe skill
 
 Replace <endpoint> with the Endpoint link for your Foundry project. This explicit priming with endpoint and name of skill is just a way of giving it even clearer hints to trigger the specific skill. However, note that coding agent behavior can be non-deterministic - and the foundry-skills usage may require more trial-and-error at this time.
 
-### 1.6 Capture & Share Feedback
+## 6. Capture & Share Feedback
 
 Once you kick off the Observability loop, the agent will continue to prompt you with actions it can take to improve your agent implementation. _Follow your intuition and explore various options to see what happens_.
 
@@ -117,30 +120,3 @@ Here are some things I was able to try:
 1. Having two versions compared based on batch evals run
 
 
-
-<br/>
-
-## 2. (Known) Using Foundry SDK
-
-These notebooks walk you through building, instrumenting, and hardening the Contoso Travel agent end-to-end using the Microsoft Foundry SDK — from creating your first agent to running adversarial red-team scans against it.
-
-### 2.1 Running a Notebook
-
-In GitHub Codespaces, open any notebook in VS Code, click **Select Kernel**, and pick the **Python 3.12** option. Clear all outputs first, then **run each cell one at a time** (rather than "Run All") so you can observe the results and understand each step before moving on. 
-
-**Note: the final cell of each notebook will cleanup the work. If you use "Run All" this will effectively clear out the outputs before you can explore them**.
-
-### 2.2 Lab Notebooks
-
-| Notebook | Description |
-|---|---|
-| [lab-01-setup.ipynb](lab-01-setup.ipynb) | Validate your environment, authenticate to Microsoft Foundry, and confirm your model deployment is ready. |
-| [lab-02-agent.ipynb](lab-02-agent.ipynb) | Create a basic Contoso Travel concierge agent with system instructions and test it with travel queries. |
-| [lab-03a-tools.ipynb](lab-03a-tools.ipynb) | Give the agent tools (functions) to look up flights, hotels, and car rentals from CSV data. |
-| [lab-03b-workflow.ipynb](lab-03b-workflow.ipynb) | Orchestrate multiple specialized agents into a multi-agent workflow that collaborates on trip planning. |
-| [lab-04-tracing.ipynb](lab-04-tracing.ipynb) | Instrument the agent with OpenTelemetry tracing and export telemetry to Application Insights. |
-| [lab-05-evaluation.ipynb](lab-05-evaluation.ipynb) | Evaluate agent quality, safety, and agentic performance using built-in Foundry evaluators. |
-| [lab-06-redteam.ipynb](lab-06-redteam.ipynb) | Run cloud-based adversarial red-team scans to find vulnerabilities before production deployment. |
-| |
-
-**Note:** _There may be issues running the Red Teaming notebook, or running a scan in the portal. Keep an eye out for updates to this repo with more information later_.

@@ -1,113 +1,96 @@
-# WORKSHOP: Observe, Protect & Optimize your AI Agents With Microsoft Foundry Control Plane
+# Workshop: "Observe, Optimize & Protect Your AI Agents In Microsoft Foundry"
 
 ## Session Description
 
-Want to build trustworthy agentic solutions? You need end-to-end observability and security that is built-in and not bolted-on. In this workshop, we’ll look at the Foundry Control Plane in Microsoft Foundry and go hands-on with three key features - Evaluations, Tracing and Red Teaming - and build intuition for using the “Operate” tab on the Foundry portal as a command center for monitoring our deployed solutions for insights.
+**Duration:** 75 minutes
 
+Want to build trustworthy AI agents? The hard part lies NOT in making them work the first time, but in **keeping them working continuously** over the lifetime of the application - even as models get updated, prompts get refined, retrieval pipelines drift, and real-world use uncovers edge cases. To do this, we need a unified platform that provides end-to-end observability - 
+with rich developer tools that take us seamlessly from _detecting_ AI quality issues to _diagnosing_ them, and _optimizing_ solutions for performance in an iterative fashion.
+
+In this workshop, we'll get hands-on experience with the Microsoft Foundry observabilty platform by exploring one of two available paths:
+
+1. **Using Foundry SDK** - use a code-first approach to learn how you can build, evaluate, trace, and red-team your AI agent solution.
+1. **Using Foundry Skills** - use a coding-agent approach to orchestrate a full eval-driven optimization cycle from a base AI agent.
+
+The first option is more traditional, giving you a sense for the concepts, tools and workflows involved. The second option offers an early preview into an enhanced developer experience where the coding agent accelerates the "evaluate-optimize" loop to take actions (like creating datasets, running batch evaluations, comparing versions, optimizing prompts or instructions etc.) based on observed results rather than guesswork. Along the way, you'll build your intuition for these tools by looking at the agent reasoning process and guiding its decision-making when prompted.
 
 ## Application Scenario
 
-We'll use a familiar scenario across all labs, allowing us to think about features and outcomes in the context of a real-world use case. 
+We'll use a consistent scenario across all labs, allowing us to think about features and outcomes in the context of a real-world use case. 
 
-**Contoso Travel** is a fictitious mid-size travel agency whose team of human advisors can no longer keep up with the volume of customer inquiries. They need an AI-powered travel assistant — a system of intelligent agents that can search real inventory, make personalized recommendations, and plan multi-leg trips just like their best human advisors.
+**Contoso Travel** is a fictitious mid-size travel agency whose team of human advisors can no longer keep up with the volume of customer inquiries for booking travel. They need an AI-powered travel assistant — a system of intelligent agents that can search relevant inventory (e.g., hotels, flights, car rentals) to make personalized recommendations, and deliver customized itimeraries across multi-turn conversations.
 
-In this workshop, we'll look at how you can build this application with observability in focus, picking one of two potential paths for implementation.
+## Workshop Overview
 
-## Getting Started
+In this workshop, we'll trace the AI developer journey from _planning_ to _prototyping_ to _production_. By the end of the workshop, you should be able to:
 
-Want to just dive in? Visit the [Lab Setup](./labs/notebooks/0-setup/lab-00-setup-project.md) page to get started. But first, complete scanning the rest of this README to get more context.
+1. _Observe_ agentic execution with OpenTelemetry traces
+1. _Optimize_ agentic performance assisted by Foundry skills
+1. _Protect_ agents from attacks using Red Teaming scans
+1. _Deploy_ agents, then monitor & analyze insights with Ask AI 
+
+We'll achieve this using the Microsoft Foundry platform tools and workflows. By the end of this workshop you should be able to:
+
+1. _Setup_ a single prompt agent with no code - using the [Foundry portal](https://learn.microsoft.com/en-us/azure/foundry/how-to/navigate-from-classic?view=foundry#navigate-the-portal).
+1. _Build_ a multi-agent solution code-first - using [the Foundry SDK](https://learn.microsoft.com/en-us/azure/foundry/how-to/develop/sdk-overview?view=foundry&pivots=programming-language-python)
+1. _Observe & Optimize_ an AI agent with coding agents - using [Foundry skills](https://github.com/microsoft/GitHub-Copilot-for-Azure/tree/main/plugin/skills/microsoft-foundry)
+
+<br/>
 
 ## Workshop Outline
 
-The workshop is designed in three sections:
-1. Project Setup - using Foundry Portal
-1. Code-First - using Foundry SDK
-1. Code-First - using Foundry Skills
+### 1. Getting Started
 
-Complete the first section - then pick one of the two options to proceed further. You can always do the second option at a later time. _We recommend trying option 2, which was just recently released in preview_ - it is in active development (so expect some issues or changes to occur) making it a great opportunity for feedback.
+This workshop has two paths to choose from:
+- **Base Path**: Complete Steps 1 & 2 to setup your infra & dev environment.
+- **Path A**: Do Step 3. Uses _Foundry Skills_ to automate the eval-optimize loop.
+- **Path B**: Do Step 4. Uses _Foundry SDK_ for traditional coding (manual).
 
-**Read on to learn more about each option**
+Completing the end-to-end journey with _either_ path can take 60 minutes or more. Pick one to complete - then try the second if time permits.
 
-<br/>
+| Step | Instructions | Tool · Outcome |
+|:---|:---|:---|
+| 1. | [Infrastructure Setup](./labs/notebooks/0-setup/lab-00-setup-project.md) | Foundry Portal · Setup Foundry project |
+| 2. | [Dev Environment Setup](./labs/notebooks/0-setup/lab-01-setup-codespaces.md) | GitHub Codespaces · Setup local .env |
+| 3. | [Activate Observe Skill](./labs/notebooks/1-prompt-agents/README.skills.md)| Foundry Skills · Run eval-optimize loop  |
+| 4. | [Build It Step-By-Step](./labs/notebooks/1-prompt-agents/README.sdk.md)| Foundry SDK · Go plan-production manually |
+| | | |
 
+### 2. Next Steps
+The current workshop (v1) is setup for use with _prompt_ agents. The next version (v2) will expand this to showcase _hosted agents_ that use custom code and runtimes with a containerized environment for maximum developer control. Fork & watch the repo for updates in May/June 2026.
 
-### Project Setup - With Foundry Portal
-
-Here's what you'll achieve by completing this lab:
-
-1. Explore the new Foundry UI and onboarding help
-1. Experience the streamlined agent creation workflow
-1. Create a Foundry project with an agent, model & app insights
-
-Then, spend a few minutes using this sample agent to explore the observability features in the Foundry portal before writing a single line of code:
-- Tracing - try a test prompt - observe trace elements in portal
-- Evaluations - explore default metrics - create a new evaluation run
-- Red Teaming - explore risks & attacks - create a red teaming scan
-
-**Then, it's time to move from plan to prototype** and go code-first!
+**The key takeaway** is that the Microsoft Foundry Observability platform will work effectively with _any_ agent (build using any programming language or framework) provided it supports OpenTelemetry-compliant traces and Responses API compliant endpoints.
 
 
-### Path 1: Code-First - With Foundry SDK
+### 3. Related Resources 
 
-Think of this as the **traditional development path** for code-first. You'll complete a structured set of notebooks that explore tracing, evaluations and red-teaming and understand the code yourself.
+The Microsoft _Foundry Control Plane_ provides tools and features to support _security, compliance, fleet management and observability_ for your agentic AI solutions - along with a unified role-aware management interface accessed through the "Operate" tab of the Microsoft Foundry portal. 
 
-You will walk away with a better intution for what each feature does - and have a sandbox (notebook) you can customize to explore more on each feature. **We will use this to build a multi-agent workflow for Contoso Travel**.
+![FCP](./labs/assets/foundry-control-plane.png)
 
-
-### Path 2: Code-First - With Foundry Skills 🆕
-
-Think of this as the **future development path** for code-first. 
-You'll use an early preview version of Foundry Skills and see how this allows you to guide the development without having to understand the specifics of code implementation.
-
-You will walk away with an intuition for what the new _observe_ sub-skill does - and have a sandbox you can revisit to explore further steps in this conversation, on your own. This path is non-deterministic. We may all start with the same prompt, but our next steps will be guided by our own responses to the coding agent.
-
-Visit the [Lab Setup](./labs/notebooks/0-setup/lab-00-setup-project.md) page to get started.
-
-<br/>
-
-## Microsoft Foundry Tools & Experiences
-
-Microsoft Foundry provides different tools and features to streamline developer experiences for both low-code and code-first developers. We have instrumented this repository with a _devcontainer_ that has all dependencies pre-installed so you can use this as a sandbox to explore any of the following later:
-
-- Foundry Portal - low-code UI experience perfect for initial planning
-- Foundry SDK - code-first experience perfect for complex prototyping
-- AI Toolkit Extension - bring low-code UI experiences into VS Code
-- Copilot for Azure Extension - bring "skills" into VS Code for coding agents
-- Azure CLI & Azure Developer CLI - command-line tools to simplify infra setup
-
-In our default paths, we prioritize _starting_ at the Foundry Portal then getting familiar with either the Foundry SDK option (traditional way) or Foundry Skills option (coding agent way) as the next step.
-
-<br/>
-
-## Future Work: Explore Hosted Agents
-
-Keep an eye on the repo for updates over the next few weeks. Our goal is to add additional paths as described below - which can explore Foundry Skills and end-to-end observability workflows for _hosted agent_ implementations for the same Contoso Travel scenario.
-
-
-| Approach | Path | Framework | Best For |
-|----------|--------|-----------|----------|
-| **Prompt Agents** | `1-prompt-agents/` | Azure AI Projects SDK | Simple agents defined via instructions + tools, no custom hosting |
-| **Hosted Agents (MAF)** | `2-hosted-agents-maf/` | Microsoft Agent Framework | Custom Python agents with in-process tools, business logic, ML models |
-| **Hosted Agents (LangGraph)** | `3-hosted-agents-langgraph/` | LangGraph + Foundry Adapter | Declarative graph-based agents with visual control flow and conditional routing |
-
-One takeaway is that evaluation and red-teaming are **agent-agnostic** — they test external behavior through Responses API regardless of how hat agent was implementated. Tracing is where the **approaches differ** most, giving you progressively deeper visibility from prompt → MAF → LangGraph.
-
-
-## Relevant Resources 
-
-The figure below provides a great visual representation of the _Foundry Control Plane_ capabilities. It combines capabilities for _security, compliance, fleet management and observability_ into a unified role-aware management interface accessed through the Microsoft Foundry portal.  
-
-In this workshop, we focus mostly on the _Observability_ features (tracing, evaluations, metrics) and explore _red teaming_ in the context of _adversarial testing_ that aligns with both evaluations (how) and security (why) components of Foundry Control Plane. Use the linked resources to learn more about individual features:
+In this workshop, we put the spotlight on Observability - but we encourage you to explore the resources below to dive deeper into the various components involved.
 
 | Resource | Description |
 |----------|-------------|
-| [Foundry Control Plane Overview](https://learn.microsoft.com/en-us/azure/foundry/control-plane/overview?view=foundry) | Enterprise-wide visibility, governance, and control of AI agents, models & tools |
-| [Observability Overview](https://learn.microsoft.com/en-us/azure/foundry/concepts/observability?view=foundry) | Monitor, understand, and troubleshoot your AI agents |
-| [Agent Tracing Overview](https://learn.microsoft.com/en-us/azure/foundry/observability/concepts/trace-agent-concept?view=foundry) | OpenTelemetry (OTel) protocols & semantic conventions support in Foundry |
-| [Evaluations Overview](https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators?view=foundry) | Built-in and custom evaluators for quality, safety & agentic performance |
-| [Red Teaming Overview](https://learn.microsoft.com/en-us/azure/foundry/concepts/ai-red-teaming-agent?view=foundry) | Adversarial testing for targeted risk categories & attack strategies |
+| [Foundry Control Plane](https://learn.microsoft.com/en-us/azure/foundry/control-plane/overview?view=foundry) | Enterprise-wide visibility, governance, and control of AI agents, models & tools |
+| [Observability](https://learn.microsoft.com/en-us/azure/foundry/concepts/observability?view=foundry) | Monitor, understand, and troubleshoot your AI agents |
+| [Agent Tracing](https://learn.microsoft.com/en-us/azure/foundry/observability/concepts/trace-agent-concept?view=foundry) | OpenTelemetry (OTel) protocols & semantic conventions support in Foundry |
+| [Evaluations](https://learn.microsoft.com/en-us/azure/foundry/concepts/built-in-evaluators?view=foundry) | Built-in and custom evaluators for quality, safety & agentic performance |
+| [Red Teaming](https://learn.microsoft.com/en-us/azure/foundry/concepts/ai-red-teaming-agent?view=foundry) | Adversarial testing for targeted risk categories & attack strategies |
+| | |
 
-![FCP](./labs/assets/foundry-control-plane.png)
+
+## Workshop Branches
+
+This workshop is intended to be an evergreen resource that will evolve to reflect the latest Microsoft Foundry platform updates. For convenience, we will maintain _branches_ for prior workshop versions that were delivered at specific events.
+
+| Date | Branch | Description |
+|:---|:---|:---|
+| Mar 27 2026 | [2026-03-mvp-summit](https://github.com/Azure-Samples/microsoft-foundry-e2e-agent-observability-workshop/tree/2026-03-mvp-summit) | Prompt agent with `observe` skill |
+| Apr 04 2026 | [2026-04-aie-europe](https://github.com/Azure-Samples/microsoft-foundry-e2e-agent-observability-workshop/tree/2026-04-aie-europe) | Prompt agent with `observe` skill |
+| Apr 18 2026 | [2026-04-msft-tw](https://github.com/Azure-Samples/microsoft-foundry-e2e-agent-observability-workshop/tree/2026-04-aie-europe) | Prompt agent with `observe` skill |
+| | | |
+
 
 ## Contributing
 
